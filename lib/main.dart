@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 void main() {
   runApp(LabNotebook());
 }
@@ -42,7 +43,38 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  
+  _openGallery() {} // to be defined
+
+  _openCamera() {} // to be defined
+
+  Future<void> _showPhotoDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Add Image"),
+            content: SingleChildScrollView(
+                child: ListBody(
+              children: <Widget>[
+                GestureDetector(
+                  child: Text("Gallery"),
+                  onTap: () {
+                    _openGallery();
+                  },
+                ),
+                Padding(padding: EdgeInsets.all(8.0)),
+                GestureDetector(
+                  child: Text("Camera"),
+                  onTap: () {
+                    _openCamera();
+                  },
+                )
+              ],
+            )),
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -54,28 +86,25 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
-        child: new SafeArea(
-          child: new Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Container(
+          child: new SafeArea(
+              child: new Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+            Container(
                 decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
+                    border: Border(
+                        bottom: BorderSide(
                       color: Colors.grey[400],
                       width: 0.5,
-                    )
-                  ),
-                  color: Colors.white
-                ),
+                    )),
+                    color: Colors.white),
                 width: 48.0,
                 height: 48.0,
-                child: new Stack( 
-                  children: <Widget>[
-                    new Row(
+                child: new Stack(children: <Widget>[
+                  new Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      children:<Widget>[
+                      children: <Widget>[
                         IconButton(
                           icon: Icon(Icons.title),
                           color: Colors.grey[700],
@@ -86,8 +115,10 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                         IconButton(
                           icon: Icon(Icons.add_photo_alternate),
-                          color: Colors.red[700],
-                          onPressed: () {},
+                          color: Colors.blue[700],
+                          onPressed: () {
+                            _showPhotoDialog(context);
+                          },
                         ),
                         SizedBox(
                           width: 30.0,
@@ -105,30 +136,21 @@ class _MyHomePageState extends State<MyHomePage> {
                           color: Colors.grey[700],
                           onPressed: () {},
                         )
-                      ]
-                    ),
-                    new Row(
+                      ]),
+                  new Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children:<Widget>[
+                      children: <Widget>[
                         IconButton(
                           icon: Icon(Icons.arrow_back),
                           color: Colors.black,
                           onPressed: () {},
                         )
-                      ]
-                    )
-                  ]
-                )
-              ),
-              Container(
-                color: Colors.white,
-                height: MediaQuery.of(context).size.height
-              )
-            ]
-          )
-        )
-      ),
+                      ])
+                ])),
+            Container(
+                color: Colors.white, height: MediaQuery.of(context).size.height)
+          ]))),
     );
   }
 }
