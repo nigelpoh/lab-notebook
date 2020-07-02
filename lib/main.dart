@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
 void main() {
   runApp(LabNotebook());
@@ -43,9 +45,24 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  _openGallery() {} // to be defined
+  File imageFile;
+  final picker = ImagePicker();
 
-  _openCamera() {} // to be defined
+  _openGallery() async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
+    setState(() {
+      imageFile = File(pickedFile.path);
+    });
+  }
+
+  _openCamera() async {
+    final pickedFile = await picker.getImage(source: ImageSource.camera);
+
+    setState(() {
+      imageFile = File(pickedFile.path);
+    });
+  }
 
   Future<void> _showPhotoDialog(BuildContext context) {
     return showDialog(
