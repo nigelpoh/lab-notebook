@@ -18,7 +18,7 @@ class LabNotebook extends StatelessWidget {
         //primarySwatch: Colors.grey,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(),
+      home: MyHomePage(), // landing screen
     );
   }
 }
@@ -86,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                         IconButton(
                           icon: Icon(Icons.add_photo_alternate),
-                          color: Colors.grey[700],
+                          color: Colors.red[700],
                           onPressed: () {},
                         ),
                         SizedBox(
