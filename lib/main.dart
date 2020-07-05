@@ -54,6 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       imageFile = File(pickedFile.path);
     });
+    Navigator.of(context).pop();
   }
 
   _openCamera() async {
@@ -62,6 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       imageFile = File(pickedFile.path);
     });
+    Navigator.of(context).pop();
   }
 
   Future<void> _showPhotoDialog(BuildContext context) {
@@ -90,6 +92,14 @@ class _MyHomePageState extends State<MyHomePage> {
             )),
           );
         });
+  }
+
+  Widget _detectImageView() {
+    if (imageFile == null) {
+      return null;
+    } else {
+      Image.file(imageFile, height: 400, width: 400);
+    }
   }
 
   @override
@@ -165,6 +175,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         )
                       ])
                 ])),
+            _detectImageView(),
             Container(
                 color: Colors.white, height: MediaQuery.of(context).size.height)
           ]))),
